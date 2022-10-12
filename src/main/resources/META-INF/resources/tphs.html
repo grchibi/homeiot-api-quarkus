@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>TPH REST service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.8/wing.min.css"/>
+    <!-- Load AngularJS -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript">
+      var app = angular.module("TphManagement", []);
+
+      //Controller Part
+      app.controller("TphManagementController", function ($scope, $http) {
+
+        //Initialize page with default data which is blank in this example
+        $scope.tphs = [];
+
+        $scope.form = {
+          dsrc: "",
+          dt: "",
+          t: 0.00,
+          p: 0.00,
+          h: 0.00
+        };
+
+        //Now load the data from server
+        _refreshPageData();
+
+        //HTTP POST methods for add fruits
+        $scope.add = function () {
+          var data = { "dsrc": $scope.form.dsrc, "dt": $scope.form.dt, "t": $scope.form.t, "p": $scope.form.p, "h": $scope.form.h };
+
+          $http({
+            method: "POST",
+            url: '/tph_register',
+            data: angular.toJson(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(_success, _error);
+        };
+
+        /* Private Methods */
+        //HTTP GET- get all fruits collection
+        function _refreshPageData() {
+          $http({
+            method: 'GET',
+            url: '/tph_register'
+          }).then(function successCallback(response) {
+            $scope.tphs = response.data;
+          }, function errorCallback(response) {
+            console.log(response.statusText);
+          });
+        }
+
+        function _success(response) {
+          _refreshPageData();
+          _clearForm();
+        }
+
+        function _error(response) {
+          alert(response.data.message || response.statusText);
+        }
+
+        //Clear the form
+        function _clearForm() {
+          $scope.form.dsrc = "";
+          $scope.form.dt = "";
+          $scope.form.t = 0.00;
+          $scope.form.p = 0.00;
+          $scope.form.h = 0.00;
+        }
+      });
+    </script>
+</head>
+<body ng-app="TphManagement" ng-controller="TphManagementController">
+
+<div class="container">
+    <h1>REST Service - TPH</h1>
+
+    <h3>Add a tph</h3>
+    <form ng-submit="add()">
+        <div class="row">
+            <div class="col-6"><input type="text" placeholder="DSRC" ng-model="form.dsrc" size="10"/></div>
+        </div>
+        <div class="row">
+            <div class="col-6"><input type="text" placeholder="DateTime" ng-model="form.dt" size="12"/></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><input type="number" placeholder="Temp" step="0.01" ng-model="form.t" size="5"/></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><input type="number" placeholder="Press" step="0.01" ng-model="form.p" size="7"/></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><input type="number" placeholder="Humid" step="0.01" ng-model="form.h" size="5"/></div>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+
+    <h3>TPH List</h3>
+    <div class="row">
+        <div class="col-2">DSRC</div>
+        <div class="col-4">DateTime</div>
+        <div class="col-2">Temp</div>
+        <div class="col-2">Press</div>
+        <div class="col-2">Humid</div>
+    </div>
+    <div class="row" ng-repeat="tph in tphs">
+        <div class="col-2">{{ tph.dsrc }}</div>
+        <div class="col-4">{{ tph.dt }}</div>
+        <div class="col-2">{{ tph.t }}</div>
+        <div class="col-2">{{ tph.p }}</div>
+        <div class="col-2">{{ tph.h }}</div>
+    </div>
+</div>
+
+</body>
+</html>

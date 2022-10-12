@@ -1,0 +1,12 @@
+http://192.168.0.31:9090/tph_register
+http://192.168.0.31:9090/q/swagger-ui
+
+{"dsrc": "ESP32-1", "dt": "+202008191737", "t": 27.02, "p": 1008.75, "h": 49.44}
+
+PostgreSQL
+  DB: 
+  UID/PWD: 
+
+
+./mvnw quarkus:dev
+./mvnw clean package
