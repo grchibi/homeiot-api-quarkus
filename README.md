@@ -11,6 +11,7 @@ Before building, install the following software.
 After installing the software, execute the following command.
 ```
 $ mvn wrapper:wrapper
+```
 
 ## Prepare the environment config file
 
