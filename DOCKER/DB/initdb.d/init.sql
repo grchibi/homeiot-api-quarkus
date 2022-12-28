@@ -391,7 +391,7 @@ COPY public.iot_devices (id, uname, model, description, created_at, updated_at) 
 1	rbpi0-1	RaspberryPi Zero WH	1st pi zero	2019-07-20 11:46:44.823823	2019-07-20 11:46:44.823823
 2	rbpi0-2	RaspberryPi Zero WH	2nd pi zero	2019-07-28 13:22:10.132316	2019-07-28 13:22:10.132316
 3	rbpi0-4	RaspberryPi Zero WH	4th pi zero	2019-10-22 15:54:33.62863	2019-10-22 15:54:33.62863
-4	ESP32-1	ESP32	1st ESP32	2020-11-15 19:33:11.971491	2020-11-15 19:33:11.971491
+4	BME280_BEACON_2	ESP32	1st ESP32	2020-11-15 19:33:11.971491	2020-11-15 19:33:11.971491
 \.
 
 

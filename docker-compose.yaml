@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+    homeiotdb:
+        image: postgres:14.6-bullseye
+#            context: .
+#            dockerfile: ./Dockerfile
+#            args:
+#                - DB_LANG=ja_JP
+        container_name: "homeiotdb"
+        ports:
+                - ${DB_OUTSIDE_PORT:-5432}:$DB_INSIDE_PORT
+        environment:
+            POSTGRES_DB: homeiotdb
+            POSTGRES_USER: $DB_USER
+            POSTGRES_PASSWORD: $DB_PWD
+        volumes:
+            - homeiot_data:/var/lib/postgresql/data
+            - ./DOCKER/DB/initdb.d:/docker-entrypoint-initdb.d
+
+    homeiotapi:
+        build:
+            context: .
+            dockerfile: ./src/main/docker/Dockerfile.jvm
+        container_name: "homeiotapi"
+        ports:
+            - ${API_PORT:-9090}:9090
+        environment:
+            DB_UID: $DB_USER
+            DB_PWD: $DB_PWD
+            DB_HOST: homeiotdb
+            DB_PORT: $DB_INSIDE_PORT
+
+volumes:
+    homeiot_data:
+        driver: local
