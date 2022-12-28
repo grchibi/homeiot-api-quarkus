@@ -19,11 +19,11 @@ $ mvn wrapper:wrapper
 $ vi .env
 ```
 
-- DB_USER=<database user name to access>
-- DB_PWD=<database user's password to access>
-- DB_INSIDE_PORT=<database port number to access from the api server>
-- DB_OUTSIDE_PORT=<database port number to access from the outside of the container>
-- API_PORT=<API server's port number to access>
+- DB_USER=[database user name to access]
+- DB_PWD=[database user's password to access]
+- DB_INSIDE_PORT=[database port number to access from the api server]
+- DB_OUTSIDE_PORT=[database port number to access from the outside of the container]
+- API_PORT=[API server's port number to access]
 
 ## Build
 
