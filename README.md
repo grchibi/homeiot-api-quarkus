@@ -1,61 +1,43 @@
-# code-with-quarkus Project
+# homeiot-api-quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Build prerequisites
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+Before building, install the following software.
+- docker
+- docker-compose
+- OpenJDK 11
+- Maven
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+After installing the software, execute the following command.
+```
+$ mvn wrapper:wrapper
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Prepare the environment config file
 
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
 ```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+$ vi .env
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+- DB_USER=[database user name to access]
+- DB_PWD=[database user's password to access]
+- DB_INSIDE_PORT=[database port number to access from the api server]
+- DB_OUTSIDE_PORT=[database port number to access from the outside of the container]
+- API_PORT=[API server's port number to access]
 
-## Creating a native executable
+## Build
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
+```
+$ ./mvnw package
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
+## Run the servers
+
+```
+$ docker-compose up -d
 ```
 
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- RESTEasy Reactive ([guide](https://quarkus.io/guides/resteasy-reactive)): A JAX-RS implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Reactive PostgreSQL client ([guide](https://quarkus.io/guides/reactive-sql-clients)): Connect to the PostgreSQL database using the reactive pattern
-
-## Provided Code
-
-### RESTEasy Reactive
-
-Easily start your Reactive RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+To test the connection from a client, try the following URL via your browser.
+```
+http://<Server's IP address or the FQDN>:<API_PORT>/q/swagger-ui
+```
