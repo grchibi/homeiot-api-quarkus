@@ -35,7 +35,8 @@ public class TphApis {
      * @return
      */
     @POST
-    public Uni<Response> add(Tph tph) {
+    public Uni<Response> add(TphEnvelope tphEnvelope) {
+        Tph tph = tphEnvelope.tph_register;
         LOG.info("RECEIVED MSG => " + tph.toString());
 
         Uni<IotDevice> iotdev = IotDevice.findByUname(tph.dsrc);
