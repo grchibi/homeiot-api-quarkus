@@ -50,7 +50,7 @@ public class TphApis {
                 TphRecord newRecord = new TphRecord();
 
                 try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("+yyyyMMddHHmm");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
                     newRecord.dt = sdf.parse(tph.dt);
                     newRecord.t = tph.t;
                     newRecord.p = tph.p;

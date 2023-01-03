@@ -23,6 +23,7 @@ services:
         build:
             context: .
             dockerfile: ./src/main/docker/Dockerfile.jvm
+        image: grchibi/homeiot-api-quarkus_api:1.00
         container_name: "homeiotapi"
         ports:
             - ${API_PORT:-9090}:9090
