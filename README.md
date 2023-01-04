@@ -65,5 +65,5 @@ $ docker logs homeiotapi
 ```
 You can view the journal logs, too.
 ```
-journalctl -f -u homeiot-api-quarkus.service
+$ journalctl -f -u homeiot-api-quarkus.service
 ```
