@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
@@ -17,6 +18,7 @@ public class TphRecord extends PanacheEntityBase {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tph_records_id_seq")
+    @SequenceGenerator(name = "tph_records_id_seq", sequenceName = "tph_records_id_seq", allocationSize = 1)
     public int id;
 
     public Date dt;
