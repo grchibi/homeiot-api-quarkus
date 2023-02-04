@@ -35,11 +35,11 @@ $ ./mvnw package
 
 To run the API server, execute this command.
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 Then, to stop the API server, execute the following command.
 ```
-$ docker-compose down
+$ docker compose down
 ```
 
 To test the connection from a client, try the following URL via your browser.
