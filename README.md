@@ -65,5 +65,5 @@ $ docker logs homeiotapi
 ```
 You can view the journal logs, too.
 ```
-$ journalctl -f -u homeiot-api-quarkus.service
+$ journalctl -u homeiot-api-quarkus.service --no-pager --since="2023-01-27 18:00:00"
 ```
